@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, Box } from "@mantine/core";
+import { TextInput, Box, createStyles } from "@mantine/core";
 import { UseForm } from "@mantine/hooks/lib/use-form/use-form";
 
 type Props = {
@@ -13,25 +13,16 @@ export default function NewMessageForm({
   messageFormData,
   handleSubmitMessage,
 }: Props) {
+  const { classes } = useStyles();
   return (
-    <Box
-      sx={(theme) => ({
-        width: "100%",
-        position: "absolute",
-        bottom: 0,
-        padding: "2rem",
-        backgroundColor: "white"
-      })}
-    >
+    <Box  className={classes.boxContainer}>
       <form
         onSubmit={messageFormData.onSubmit((values) =>
           handleSubmitMessage(values.newMessage)
         )}
       >
         <TextInput
-          sx={(theme) => ({
-            // input: { paddingInline: "2rem" },
-          })}
+          classNames={{ root: classes.messageInput }}
           required
           placeholder="New Message"
           {...messageFormData.getInputProps("newMessage")}
@@ -40,3 +31,16 @@ export default function NewMessageForm({
     </Box>
   );
 }
+
+const useStyles = createStyles((theme) => ({
+  boxContainer: {
+    width: "100%",
+    position: "absolute",
+    bottom: 0,
+    padding: "2rem",
+    backgroundColor: "white",
+  },
+  messageInput: {
+    width: "100%",
+  },
+}));

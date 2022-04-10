@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Messages from "../components/chatlog/Messages";
 import NewMessageForm from "../components/chatlog/NewMessageForm";
-import { Group, Box } from "@mantine/core";
+import { Group, Box, createStyles } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
 
 type Props = {};
@@ -11,6 +11,8 @@ interface Message {
 
 export default function ChatLog({}: Props) {
   const [messages, setMessages] = useState<Message[]>(dummyArray);
+  const { classes } = useStyles();
+
   const newMessageForm = useForm({
     initialValues: {
       newMessage: "",
@@ -21,16 +23,9 @@ export default function ChatLog({}: Props) {
     setMessages([...messages, { content: newMessage }]);
     newMessageForm.setFieldValue("newMessage", "");
   };
+
   return (
-    <Box
-      sx={(theme) => ({
-        width: "100%",
-        position: "relative",
-        height: "100vh",
-        maxHeight: "100vh",
-        overflow: "hidden"
-      })}
-    >
+    <Box className={classes.boxContainer}>
       <Group direction="column">
         <Messages messages={messages} />
         <NewMessageForm
@@ -48,4 +43,14 @@ const dummyArray: Message[] = [...Array(30)].map(() => {
     .sort(() => 0.5 - Math.random())
     .join("");
   return { content: randomStr.slice(0, Math.random() * 26 + 2) };
+});
+
+const useStyles = createStyles({
+  boxContainer: {
+    width: "100%",
+    position: "relative",
+    height: "100vh",
+    maxHeight: "100vh",
+    overflow: "hidden",
+  },
 });
