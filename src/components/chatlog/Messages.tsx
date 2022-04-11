@@ -5,7 +5,7 @@ type Props = {
   messages: Message[];
 };
 
-interface Message {
+export interface Message {
   content: string;
 }
 
