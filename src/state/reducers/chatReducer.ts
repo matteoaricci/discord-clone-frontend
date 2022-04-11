@@ -1,17 +1,15 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 import { Message } from "../../components/chatlog/Messages";
+import * as actions from "../actions/chatActions"
 
 const initialState: Message[] = [];
 
-const initialize = createAction<Message[]>("chat/initialize");
-const add = createAction<Message>("chat/add");
-
 const chatReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(initialize, (state, action) => {
+    .addCase(actions.initialize, (state, action) => {
       return action.payload;
     })
-    .addCase(add, (state, action) => {
+    .addCase(actions.add, (state, action) => {
       return [...state, action.payload];
     });
 });
