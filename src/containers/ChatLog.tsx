@@ -25,11 +25,11 @@ export default function ChatLog({}: Props) {
   });
 
   useEffect(() => {
-    dispatch({ type: actions.initialize, payload: dummyArray });
+    dispatch({ type: actions.initialize.type, payload: dummyArray });
   }, []);
 
   const handleSubmitMessage = (newMessage: string) => {
-    dispatch({ type: actions.add, payload: { content: newMessage } });
+    dispatch({ type: actions.add.type, payload: { content: newMessage } });
     newMessageForm.setFieldValue("newMessage", "");
   };
 
