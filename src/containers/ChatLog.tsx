@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Messages from "../components/chatlog/Messages";
 import NewMessageForm from "../components/chatlog/NewMessageForm";
 import { Group, Box, createStyles } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../state/reducers";
+import * as actions from "../state/actions/chatActions";
 
 type Props = {};
 interface Message {
@@ -10,7 +13,9 @@ interface Message {
 }
 
 export default function ChatLog({}: Props) {
-  const [messages, setMessages] = useState<Message[]>(dummyArray);
+  const chat: Message[] = useSelector((state: RootState) => state.chat);
+  const dispatch = useDispatch();
+
   const { classes } = useStyles();
 
   const newMessageForm = useForm({
@@ -19,15 +24,19 @@ export default function ChatLog({}: Props) {
     },
   });
 
+  useEffect(() => {
+    dispatch({ type: actions.initialize.type, payload: dummyArray });
+  }, []);
+
   const handleSubmitMessage = (newMessage: string) => {
-    setMessages([...messages, { content: newMessage }]);
+    dispatch({ type: actions.add.type, payload: { content: newMessage } });
     newMessageForm.setFieldValue("newMessage", "");
   };
 
   return (
     <Box className={classes.boxContainer}>
       <Group direction="column">
-        <Messages messages={messages} />
+        <Messages messages={chat} />
         <NewMessageForm
           messageFormData={newMessageForm}
           handleSubmitMessage={handleSubmitMessage}
