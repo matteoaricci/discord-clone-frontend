@@ -5,7 +5,7 @@ import { Group, Text, createStyles } from "@mantine/core";
 
 type Props = {
   channel: Channel;
-  handleChannelClick: (channel: Channel) => void;
+  handleChannelClick: (channel: string) => void;
   isSelected: boolean;
 };
 
@@ -21,7 +21,7 @@ export default function ChannelDisplay({
   const { classes } = useStyles({ isSelected });
   return (
     <Group
-      onClick={() => handleChannelClick(channel)}
+      onClick={() => handleChannelClick(channel.id)}
       className={classes.groupContainer}
       my="0.5rem"
       mx="0.5rem"
@@ -40,6 +40,6 @@ const useStyles = createStyles((theme, { isSelected }: StylesType) => ({
     "&:hover": {
       backgroundColor: theme.colors.dark[0],
     },
-    backgroundColor: isSelected ? theme.colors.dark[0] : "white"
+    backgroundColor: isSelected ? theme.colors.dark[0] : "white",
   },
 }));

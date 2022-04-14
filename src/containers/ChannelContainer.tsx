@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/reducers";
 import ChannelDisplay from "../components/channel/ChannelDisplay";
 import * as channelActions from "../state/actions/channelActions";
+import { Message } from "../components/chatlog/Messages";
 
 type Props = {};
 
 export type Channel = {
   name: string;
   id: string;
+  messages: Message[]
 };
 
 export default function ChannelContainer({}: Props) {
@@ -19,7 +21,7 @@ export default function ChannelContainer({}: Props) {
   const currentChannel = useSelector(
     (state: RootState) => state.channel.currentChannel
   );
-  const handleChannelClick = (channel: Channel) => {
+  const handleChannelClick = (channel: string) => {
     dispatch({ type: channelActions.setCurrentChannel.type, payload: channel });
   };
   return (
@@ -32,7 +34,7 @@ export default function ChannelContainer({}: Props) {
                 key={channel.id}
                 channel={channel}
                 handleChannelClick={handleChannelClick}
-                isSelected={channel.id === currentChannel.id}
+                isSelected={channel.id === currentChannel}
               />
             );
           })}
