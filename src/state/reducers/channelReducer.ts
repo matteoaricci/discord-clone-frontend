@@ -61,7 +61,7 @@ const initialState: ChannelState = {
       ],
     },
     {
-      id: "6258661efe17945aee53d9be",
+      id: "6258661efe17945aee53d9ae",
       name: "Channel 3",
       messages: [
         {
@@ -97,11 +97,12 @@ const channelReducer = createReducer(initialState, (builder) => {
       state.channels = action.payload;
     })
     .addCase(actions.setCurrentChannel, (state, action) => {
+      console.log(action)
       state.currentChannel = action.payload;
     })
     .addCase(actions.addMessage, (state, action) => {
       const channel = state.channels.find(
-        (channel) => (channel.id = action.payload.channelId)
+        (channel) => (channel.id === action.payload.channelId)
       );
       if (channel) {
         channel.messages = [...channel.messages, action.payload.message];

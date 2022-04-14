@@ -16,7 +16,7 @@ export default function ChatHub({ messages = [] }: Props) {
       <Group direction="column">
         {messages.map((message, index) => {
           return (
-            <Group key={index}>
+            <Group key={"message-" + index}>
               <Box className={classes.messageBox}>{message.content}</Box>
             </Group>
           );
