@@ -56,7 +56,7 @@ const dummyArray: Message[] = [...Array(30)].map(() => {
 
 const useStyles = createStyles({
   boxContainer: {
-    width: "100%",
+    flex: 1,
     position: "relative",
     height: "100vh",
     maxHeight: "100vh",
