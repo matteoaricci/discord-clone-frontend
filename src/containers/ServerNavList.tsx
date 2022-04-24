@@ -7,7 +7,8 @@ import { Server } from "../state/actions/serverActions";
 type Props = {};
 
 export default function ServerNavList({}: Props) {
-  const servers = useSelector((state: RootState) => state.server);
+  const servers = useSelector((state: RootState) => state.server.servers);
+  const currentServer = useSelector((state: RootState) => state.server.currentServer)
   const { classes } = useStyles();
   return (
     <Box className={classes.boxContainer}>
