@@ -1,11 +1,14 @@
-import React from 'react';
-import ChatLog from "./containers/ChatLog"
+import React from "react";
+import ChatLog from "./containers/ChatLog";
+import { MantineProvider } from "@mantine/core";
 
 function App() {
   return (
-    <div className="App">
-      <ChatLog />
-    </div>
+    <MantineProvider theme={{ colorScheme: 'dark' }}>
+      <div className="App">
+        <ChatLog />
+      </div>
+    </MantineProvider>
   );
 }
 
